@@ -47,5 +47,14 @@ class TestUserRegistration:
         is_valid = obj.get_input(input_type, input_data)
         assert is_valid == result
 
-
-    
+    @pytest.mark.parametrize("input_type, input_data, result",[
+                ("phone", "91 1231231234",True),
+                ("phone", "911 1231231234",False ),
+                ("phone", "911231231234",False),
+                ("phone", "91 123123123",False),
+                ("phone", "91 123123123123",False)
+    ])
+    def test_given_phone_no_when_valid_or_invalid_returns_result(self, input_type, input_data, result):
+        obj = MainClass()
+        is_valid = obj.get_input(input_type, input_data)
+        assert is_valid == result
